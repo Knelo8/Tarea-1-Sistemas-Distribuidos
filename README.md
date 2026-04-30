@@ -24,6 +24,7 @@ Para garantizar la reproducibilidad del entorno, se requiere el uso de Docker co
 Para la construcción y ejecución de todos los servicios implementados, ejecute el siguiente comando en la raíz del repositorio:
 ```bash
 docker compose up --build
+```
 
 Una vez que el despliegue finalice, las interfaces estarán disponibles en las siguientes direcciones:
 
