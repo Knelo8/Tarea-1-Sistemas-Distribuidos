@@ -28,19 +28,19 @@ docker compose up --build
 
 Una vez que el despliegue finalice, las interfaces estarán disponibles en las siguientes direcciones:
 
-Dashboard Visual: http://localhost:8501
+*   **Dashboard Visual**: http://localhost:8501
 
-Sistema de Métricas (JSON): http://localhost:8001/stats
+*   **Sistema de Métricas (JSON)**: http://localhost:8001/stats
 
-Interceptor de Caché: http://localhost:8003
+*   **Interceptor de Caché**: http://localhost:8003
 
-Configuraciones Experimentales
+## Configuraciones Experimentales
 El sistema permite la evaluación del rendimiento bajo distintos escenarios de configuración definidos en el enunciado:
 
-Distribuciones de Tráfico: Modificables mediante la variable de entorno DISTRIBUCION en el servicio generador_trafico (Uniforme o Zipf).
+*   **Distribuciones de Tráfico**: Modificables mediante la variable de entorno DISTRIBUCION en el servicio generador_trafico (Uniforme o Zipf).
 
-Políticas de Remoción: Configurables en el archivo redis.conf mediante la directiva maxmemory-policy (LRU, LFU, FIFO).
+*   **Políticas de Remoción**: Configurables en el archivo redis.conf mediante la directiva maxmemory-policy (LRU, LFU, FIFO).
 
-Tamaño de Memoria: Ajustable en redis.conf mediante el parámetro maxmemory (e.g., 50MB, 200MB, 500MB).
+*   **Tamaño de Memoria**: Ajustable en redis.conf mediante el parámetro maxmemory (e.g., 50MB, 200MB, 500MB).
 
-Tiempo de Vida (TTL): Configurable mediante la variable de entorno CACHE_TTL en el servicio sistema_cache.
+*   **Tiempo de Vida (TTL)**: Configurable mediante la variable de entorno CACHE_TTL en el servicio sistema_cache.
