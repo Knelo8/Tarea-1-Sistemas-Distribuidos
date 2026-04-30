@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Redis Cache
+  redis_cache:
+    image: redis:alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  # Almacenamiento de Métricas
+  sistema_metricas:
+    build: ./sistema_metricas
+    container_name: sistema_metricas
+    ports:
+      - "8001:8000"
+    depends_on:
+      - redis_cache
+
+  # Generador de Respuestas
+  generador_respuestas:
+    build: ./generador_respuestas
+    container_name: generador_respuestas
+    ports:
+      - "8002:8000"
+    depends_on:
+      - sistema_metricas
+
+  # Sistema de Caché
+  sistema_cache:
+    build: ./sistema_cache
+    container_name: api_cache
+    ports:
+      - "8003:8000"
+    depends_on:
+      - redis_cache
+      - generador_respuestas
+      - sistema_metricas
+    environment:
+      - CACHE_TTL=300
+
+  # Generador de Tráfico
+  generador_trafico:
+    build: ./generador_trafico
+    container_name: generador_trafico
+    depends_on:
+      - sistema_cache
+
+  # Dashboard de Visualización
+  dashboard:
+    build: ./dashboard
+    container_name: dashboard_visualizacion
+    ports:
+      - "8501:8501"
+    depends_on:
+      - sistema_metricas
